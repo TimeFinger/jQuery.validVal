@@ -13,6 +13,13 @@
     "validation",
     "validator"
   ],
+  "ignore": [
+    ".jshintrc",
+    "Guardfile",
+    "index.html",
+    "*.json",
+    "README.md"
+  ],
   "dependencies": {
     "jquery": ">= 1.6.0"
   }
