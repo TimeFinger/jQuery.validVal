@@ -1,6 +1,6 @@
 {
   "name": "jQuery.validVal",
-  "main": "js/jquery.validVal.js",
+  "main": "src/js/jquery.validVal.js",
   "version": "5.0.2",
   "homepage": "http://validval.frebsite.nl/",
   "authors": [
