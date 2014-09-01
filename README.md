@@ -4,15 +4,12 @@ jquery.validVal
 A highly customizable and feature rich jQuery form validator plugin that embraces the power of HTML5.
 For examples and the complete documentation, visit http://validval.frebsite.nl
 
-<img src="http://validval.frebsite.nl/img/preview.png?a=1" border="0" />
-
 <br />
 <br />
-**
 NOTE:<br />
 Due to increasing support for html5 form validation, this plugin is no longer intensively maintained.<br />
 http://caniuse.com/#feat=form-validation
-**
+<br />
 <br />
 <br />
 
