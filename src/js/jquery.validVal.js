@@ -188,7 +188,7 @@
 					{
 						if ( vf.placeholderValue !== false )
 						{
-							$f.addClass( 'inactive' );
+							$f.addClass( that.opts.class.getClassName('inactive') );
 							$f.val( vf.placeholderValue );
 						}
 						else
@@ -524,7 +524,7 @@
 					}
 				}
 
-				if ( this.placeholderValue !== false )
+				if ( this.placeholderValue !== false )	// 说明该元素不支持phaceholder属性或【后一个条件没懂...】
 				{
 					this.__removeAttr( 'placeholder' );
 				}
@@ -702,7 +702,7 @@
 				namespace( 'focus' ),
 				function( event )
 				{
-					$(this).addClass( 'focus' );
+					$(this).addClass( that.form.opts.class.getClassName('focus') );
 					that.clearPlaceholderValue();
 				}
 			);
@@ -710,7 +710,7 @@
 				namespace( 'blur' ),
 				function( event )
 				{
-					$(this).removeClass( 'focus' );
+					$(this).removeClass( that.form.opts.class.getClassName('focus') );
 					that.validate( that.form.opts.validate.onBlur );
 				}
 			);
@@ -799,20 +799,22 @@
 					{
 						this.field[ 0 ].type = 'text';
 					}
-					catch( err ) {};
+					catch( err ) {
+						this.field[ 0 ].value = '';
+					};
 				}
 				if ( this.field.val() == this.placeholderValue )
 				{
-					this.field.addClass( 'inactive' );
+					this.field.addClass( that.form.opts.class.getClassName('inactive') );
 				}
 				if ( this.field.is( 'select' ) )
 				{
-					this.field.find( 'option:eq(' + this.placeholderNumber + ')' ).addClass( 'inactive' );
+					this.field.find( 'option:eq(' + this.placeholderNumber + ')' ).addClass( that.form.opts.class.getClassName('inactive') );
 					this.field.bind(
 						namespace( 'change' ),
 						function( event )
 						{
-							$(this)[ that.field.val() == that.placeholderValue ? 'addClass' : 'removeClass' ]( 'inactive' );
+							$(this)[ that.field.val() == that.placeholderValue ? 'addClass' : 'removeClass' ]( that.form.opts.class.getClassName('inactive') );
 						}
 					);
 				}
@@ -915,7 +917,7 @@
 				if ( this.field.val() == v1 && !this.field.is( 'select' )  )
 				{
 					this.field.val( v2 );
-					this.field[ cl ]( 'inactive' );
+					this.field[ cl ]( this.form.opts.class.getClassName('inactive') );
 
 					if ( this.passwordplaceholder ) try
 					{
@@ -1021,12 +1023,14 @@
 		},
 		'fields'	: {
 			'onValidate'	: null,
+			'xxx'	:	123,
 			'onValid'		: function()
 			{
 				$(this).add( $(this).parent() ).removeClass( 'invalid' );
 			},
 			'onInvalid'		: function()
 			{
+				console.log(self);
 				$(this).add( $(this).parent() ).addClass( 'invalid' );
 			}
 		},
@@ -1057,6 +1061,15 @@
 				}
 				alert( msg );
 				fieldArr.first().focus();
+			}
+		},
+		'class'	:	{		// 重新定义class名，防止冲突
+			'prefix'	:	'vv-',
+			'getClassName'	:	function(cls) {
+				if (typeof cls == 'string') {
+					cls = this.prefix + cls;
+				}
+				return cls;
 			}
 		},
 		'keepClasses'	: [ 'required' ],
