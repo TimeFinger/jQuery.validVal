@@ -37,6 +37,8 @@
 		this._bindEvents();			// 为表单绑定 submit、reset 事件
 		this._bindCustomEvents();	// 绑定本插件自定义事件 addField,destroy,validate,submitForm,resetForm,options
 		this.addField( this.opts.validate.fields.filter( $(_INPUTS_, this.form) ) );	// 添加要验证的字段
+
+		this._init();	// 初始化，自己加的
 	}
 	ValidVal.prototype = {
 
@@ -54,7 +56,6 @@
 			}
 
 			var that = this;	// 此处的this为 ValidVal函数的对象
-			console.log(that);
 
 			return $field.each(
 				function()
@@ -301,6 +302,9 @@
 				}
 			);
 			return this;
+		},
+		_init	:	function() {
+			
 		}
 	};
 
@@ -1023,15 +1027,13 @@
 		},
 		'fields'	: {
 			'onValidate'	: null,
-			'xxx'	:	123,
 			'onValid'		: function()
 			{
-				$(this).add( $(this).parent() ).removeClass( 'invalid' );
+				$(this).add( $(this).parent() ).removeClass( $.fn[ _PLUGIN_ ].defaults.class.getClassName('invalid') );
 			},
 			'onInvalid'		: function()
 			{
-				console.log(self);
-				$(this).add( $(this).parent() ).addClass( 'invalid' );
+				$(this).add( $(this).parent() ).addClass( $.fn[ _PLUGIN_ ].defaults.class.getClassName('invalid') );
 			}
 		},
 		'form'	: {
