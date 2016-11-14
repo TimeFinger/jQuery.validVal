@@ -37,8 +37,6 @@
 		this._bindEvents();			// 为表单绑定 submit、reset 事件
 		this._bindCustomEvents();	// 绑定本插件自定义事件 addField,destroy,validate,submitForm,resetForm,options
 		this.addField( this.opts.validate.fields.filter( $(_INPUTS_, this.form) ) );	// 添加要验证的字段
-
-		this._init();	// 初始化，自己加的
 	}
 	ValidVal.prototype = {
 
@@ -302,9 +300,6 @@
 				}
 			);
 			return this;
-		},
-		_init	:	function() {
-			
 		}
 	};
 
@@ -1010,7 +1005,7 @@
 	$.fn[ _PLUGIN_ ].defaults = {
 		'selectPlaceholder'	: 0,		// select 的默认选中项
 		'supportHtml5'		: true,
-		'language'			: 'en',
+		'language'			: 'cn',
 		'customValidations'	: {},
 		'validate'	: {
 			'onBlur'	: true,		// onBlur时是否进行验证
@@ -1056,12 +1051,16 @@
 						msg = 'Atención, no se han completado todos los campos correctamente.';
 						break;
 
+					case 'cn':
+						msg = '表单验证失败';
+						break;
+
 					case 'en':
 					default:
 						msg = 'Attention, not all fields have been filled out correctly.';
 						break;
 				}
-				alert( msg );
+				console.log( msg );
 				fieldArr.first().focus();
 			}
 		},
