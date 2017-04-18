@@ -108,10 +108,8 @@
 							var v = $f.val();
 							if ( $f.is( '[type="radio"]' ) || $f.is( '[type="checkbox"]' ) )
 							{
-								if ( !$f.is( ':checked' ) )
-								{
-									v = '';
-								}
+								var attr_name = ($f.attr('name'));
+                                v = $('input[name="'+attr_name+'"]:checked').val();
 							}
 							if ( typeof v == 'undefined' || v == null )
 							{
